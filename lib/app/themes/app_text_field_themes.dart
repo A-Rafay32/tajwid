@@ -58,7 +58,7 @@ class AppTextFieldDecorations {
     ),
   );
 
-  static final emailInputDecoration = InputDecoration(
+  static emailInputDecoration() => InputDecoration(
     suffixIcon: const Padding(
       padding: EdgeInsets.symmetric(horizontal: 26.0),
       child: Icon(Icons.email_outlined, color: Colors.black54),

@@ -24,9 +24,9 @@ class Button extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
-      onTap: () {},
+      onTap: press,
       child: Container(
-        width: context.w ,
+        width: context.w,
         padding: EdgeInsets.symmetric(
           horizontal: horizontal,
           vertical: vertical,
@@ -37,7 +37,7 @@ class Button extends StatelessWidget {
         ),
         child:
             isLoading
-                ? const ButtonLoader()
+                ? const Loader()
                 : Text(
                   text,
                   textAlign: TextAlign.center,

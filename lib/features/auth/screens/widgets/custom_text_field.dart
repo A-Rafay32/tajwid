@@ -30,25 +30,22 @@ class CustomTextField extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      // padding: EdgeInsets.symmetric(horizontal: paddingX),
-      child: TextFormField(
-        initialValue: initialValue,
-        onChanged: onChanged,
-        maxLines: maxLines,
-        onTap: onTap,
-        onFieldSubmitted: onSubmitted,
-        keyboardType: keyBoardType,
-        obscureText: obscureText,
-        validator: validator,
-        controller: controller,
-        cursorColor: Colors.black,
-        style: Theme.of(
-          context,
-        ).textTheme.labelLarge?.copyWith(fontWeight: FontWeight.w900),
-        autovalidateMode: AutovalidateMode.onUserInteraction,
-        decoration: inputDecoration,
-      ),
+    return TextFormField(
+      initialValue: initialValue,
+      onChanged: onChanged,
+      maxLines: maxLines,
+      onTap: onTap,
+      onFieldSubmitted: onSubmitted,
+      keyboardType: keyBoardType,
+      obscureText: obscureText,
+      validator: validator,
+      controller: controller,
+      cursorColor: Colors.black,
+      style: Theme.of(
+        context,
+      ).textTheme.labelLarge?.copyWith(fontWeight: FontWeight.w900),
+      autovalidateMode: AutovalidateMode.onUserInteraction,
+      decoration: inputDecoration,
     );
   }
 }

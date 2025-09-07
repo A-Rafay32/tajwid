@@ -1,20 +1,16 @@
 import "package:email_validator/email_validator.dart";
-import 'package:flutter/cupertino.dart';
 import "package:flutter/material.dart";
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:tajwid/app/themes/app_colors.dart';
 import "package:tajwid/app/themes/app_paddings.dart";
 import "package:tajwid/app/themes/app_text_field_themes.dart";
 import 'package:tajwid/core/extensions/routes_extenstion.dart';
 import 'package:tajwid/core/extensions/sizes_extensions.dart';
+import 'package:tajwid/features/auth/provider/auth_provider.dart';
 import 'package:tajwid/features/auth/screens/widgets/app_bar_white.dart';
 import 'package:tajwid/features/auth/screens/widgets/button.dart';
 import 'package:tajwid/features/auth/screens/widgets/custom_text_field.dart';
 import 'package:tajwid/features/auth/screens/widgets/header.dart';
-import 'package:tajwid/features/auth/screens/widgets/logoWidget.dart';
 import 'package:tajwid/features/auth/screens/widgets/signup_bar.dart';
-import 'package:tajwid/features/auth/screens/widgets/socialcard.dart';
 
 class RegisterScreen extends StatefulWidget {
   const RegisterScreen({super.key});
@@ -27,9 +23,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
   bool isReset = true;
 
   TextEditingController nameController = TextEditingController();
-
   TextEditingController emailController = TextEditingController();
-
   TextEditingController passwordController = TextEditingController();
 
   bool isObscure = false;
@@ -44,7 +38,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // final authProvider = context.watch<AuthProvider>();
+    final authProvider = context.watch<AuthProvider>();
 
     return Scaffold(
       appBar: PreferredSize(
@@ -92,7 +86,7 @@ class _RegisterScreenState extends State<RegisterScreen> {
                       },
                       controller: emailController,
                       inputDecoration:
-                          AppTextFieldDecorations.emailInputDecoration,
+                          AppTextFieldDecorations.emailInputDecoration(),
                     ),
                     AppSizes.normalY,
 
@@ -116,21 +110,17 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
               AppSizes.largeY,
               Button(
-                // isLoading: authProvider.loading.isLoading,
+                isLoading: authProvider.loading.isLoading,
                 press: () {
-                  // print("register hitted");
-                  // context.read<AuthProvider>().register(
-                  //   emailController.text.trim(),
-                  //   passwordController.text.trim(),
-                  //   nameController.text.trim(),
-                  //   context,
-                  // );
+                  context.read<AuthProvider>().register(
+                    email: emailController.text.trim(),
+                    password: passwordController.text.trim(),
+                    userName: nameController.text.trim(),
+                    context: context,
+                  );
                 },
-
                 text: "Register",
               ),
-              AppSizes.normalY,
-
               const Spacer(),
               SignUpBar(
                 onTap: () => context.pop(),
@@ -196,7 +186,7 @@ class _ForgotFormFieldState extends State<ForgotFormField> {
           cursorColor: Colors.black,
           style: const TextStyle(fontSize: 16, color: Colors.black),
           autovalidateMode: AutovalidateMode.onUserInteraction,
-          decoration: AppTextFieldDecorations.emailInputDecoration,
+          decoration: AppTextFieldDecorations.emailInputDecoration(),
         ),
       ),
     );

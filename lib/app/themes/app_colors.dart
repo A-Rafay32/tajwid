@@ -4,7 +4,7 @@ class AppColors {
   static const Color backgroundColor = Color(0xFFFFFFFF);
   static const Color biegeBGColor = Color(0xFFF5F5F5);
   // static const Color primaryColor = Color.fromRGBO(198, 40, 40, 1);
-  static const Color primaryColor = Color.fromRGBO(0, 147, 239, 1);
+  static const Color primaryColor = Color.fromRGBO(0, 0, 0, 1);
   static const Color secondaryColor = Color(0xFF00A693);
   static const Color blackColor = Color(0xFF212121);
   static const Color greyColor = Color(0xFFF5F5F5);

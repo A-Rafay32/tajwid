@@ -60,7 +60,7 @@ class _ForgotScreenState extends State<ForgotScreen> {
                   return value == null ? "Field can't be empty" : null;
                 },
                 controller: emailController,
-                inputDecoration: AppTextFieldDecorations.emailInputDecoration,
+                inputDecoration: AppTextFieldDecorations.emailInputDecoration(),
               ),
               AppSizes.largeY,
               Button(

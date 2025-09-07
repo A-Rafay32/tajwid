@@ -4,17 +4,16 @@ import "package:flutter_svg/svg.dart";
 import "package:provider/provider.dart";
 import "package:tajwid/app/themes/app_colors.dart";
 import "package:tajwid/app/themes/app_text_field_themes.dart";
-// import "package:tajwid/features/auth/providers/auth_providers.dart";
 import "package:tajwid/features/auth/screens/widgets/custom_text_field.dart";
 
 class AuthFormField extends StatefulWidget {
   const AuthFormField({
     super.key,
-    required this.emailController,
+    required this.usernameController,
     required this.passwordController,
   });
 
-  final TextEditingController emailController;
+  final TextEditingController usernameController;
   final TextEditingController passwordController;
 
   @override
@@ -36,12 +35,14 @@ class _AuthFormFieldState extends State<AuthFormField> {
       children: [
         CustomTextField(
           validator: (value) {
-            return value != null && !EmailValidator.validate(value)
-                ? "Enter a valid email "
+            return value != null && value.length < 6
+                ? "Enter a valid username"
                 : null;
           },
-          controller: widget.emailController,
-          inputDecoration: AppTextFieldDecorations.emailInputDecoration,
+          controller: widget.usernameController,
+          inputDecoration: AppTextFieldDecorations.genericInputDecoration(
+            label: "Username",
+          ),
         ),
         const SizedBox(height: 40),
         CustomTextField(

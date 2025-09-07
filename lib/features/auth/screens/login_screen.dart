@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:tajwid/app/themes/app_paddings.dart';
 import 'package:tajwid/core/extensions/routes_extenstion.dart';
 import 'package:tajwid/core/extensions/sizes_extensions.dart';
+import 'package:tajwid/features/auth/provider/auth_provider.dart';
 import 'package:tajwid/features/auth/screens/register_screen.dart';
 import 'package:tajwid/features/auth/screens/widgets/app_bar_white.dart';
 import 'package:tajwid/features/auth/screens/widgets/button.dart';
@@ -10,15 +12,20 @@ import 'package:tajwid/features/auth/screens/widgets/form_field.dart';
 import 'package:tajwid/features/auth/screens/widgets/header.dart';
 import 'package:tajwid/features/auth/screens/widgets/signup_bar.dart';
 
-class LoginScreen extends StatelessWidget {
-  LoginScreen({super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen({super.key});
 
-  final TextEditingController emailController = TextEditingController();
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  final TextEditingController usernameController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    // final authProvider = context.watch<AuthProvider>();
+    final authProvider = context.watch<AuthProvider>();
 
     return Scaffold(
       appBar: PreferredSize(
@@ -44,52 +51,24 @@ class LoginScreen extends StatelessWidget {
               ),
               AppSizes.largeY,
               AuthFormField(
-                emailController: emailController,
+                usernameController: usernameController,
                 passwordController: passwordController,
               ),
               AppSizes.tinyY,
               const Forgot(),
               AppSizes.largeY,
               Button(
-                // isLoading: authProvider.loading.isLoading,
+                isLoading: authProvider.loading.isLoading,
                 press: () {
-                  // if (context
-                  //         .read<AuthProvider>()
-                  //         .formKey
-                  //         .currentState
-                  //         ?.validate() ??
-                  //     false) {
-                  //   context.read<AuthProvider>().login(
-                  //     emailController.text.trim(),
-                  //     passwordController.text.trim(),
-                  //     context,
-                  //   );
-                  // }
+                  context.read<AuthProvider>().login(
+                    username: usernameController.text.trim(),
+                    password: passwordController.text.trim(),
+                    context: context,
+                  );
                 },
                 text: "Login",
               ),
               AppSizes.normalY,
-
-              // Row(
-              //   mainAxisAlignment: MainAxisAlignment.center,
-              //   children: [
-              //     Container(
-              //       height: 2,
-              //       color: Colors.black26,
-              //       width: context.w * 0.3,
-              //     ),
-              //     AppSizes.tinyX,
-              //     Text("or sign in with", style: TextStyle(fontSize: 14.sp)),
-              //     AppSizes.tinyX,
-              //     Container(
-              //       height: 2,
-              //       color: Colors.black26,
-              //       width: context.w * 0.3,
-              //     ),
-              //   ],
-              // ),
-              // AppSizes.normalY,
-              // GoogleSignInCard(),
               Spacer(),
               SignUpBar(
                 onTap: () => context.push(RegisterScreen()),

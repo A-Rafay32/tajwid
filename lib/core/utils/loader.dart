@@ -25,7 +25,7 @@ class Loader extends StatelessWidget {
       child: SizedBox(
         height: 30,
         width: 30,
-        child: CircularProgressIndicator(color: AppColors.secondaryColor),
+        child: CircularProgressIndicator(color: Colors.white),
       ),
     );
   }

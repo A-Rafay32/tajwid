@@ -1,38 +1,31 @@
-// import 'package:flutter/material.dart';
-// import 'package:tajwid/core/extensions/routes_extenstion.dart';
-// import 'package:tajwid/features/auth/screens/login_screen.dart';
-// import 'package:tajwid/features/auth/screens/update_password_screen.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:tajwid/features/auth/provider/auth_provider.dart';
+import 'package:tajwid/features/auth/screens/login_screen.dart';
+import 'package:tajwid/features/home/screens/home_screen.dart';
 
-// class AuthStateBuilder extends StatefulWidget {
-//   const AuthStateBuilder({super.key});
+class AuthStateBuilder extends StatefulWidget {
+  const AuthStateBuilder({super.key});
 
-//   @override
-//   State<AuthStateBuilder> createState() => _AuthStateBuilderState();
-// }
+  @override
+  State<AuthStateBuilder> createState() => _AuthStateBuilderState();
+}
 
-// class _AuthStateBuilderState extends State<AuthStateBuilder> {
-//   @override
-//   void initState() {
-//     super.initState();
-//   }
+class _AuthStateBuilderState extends State<AuthStateBuilder> {
+  @override
+  void initState() {
+    init();
+    super.initState();
+  }
 
-//   @override
-//   Widget build(BuildContext context) {
-//     return StreamBuilder<AuthState>(
-//       stream: AuthStateBuilder.supabase.auth.onAuthStateChange,
-//       builder: (context, snapshot) {
-//         final user = AuthStateBuilder.supabase.auth.currentUser;
+  void init() async {
+    context.read<AuthProvider>().getSessionInfo();
+  }
 
-//         if (snapshot.connectionState == ConnectionState.waiting) {
-//           return const Center(child: CircularProgressIndicator());
-//         }
-
-//         if (user != null) {
-//           return HomeScreen();
-//         } else {
-//           return LoginScreen();
-//         }
-//       },
-//     );
-//   }
-// }
+  @override
+  Widget build(BuildContext context) {
+    return context.watch<AuthProvider>().isLoggedIn == true
+        ? HomeScreen()
+        : LoginScreen();
+  }
+}
