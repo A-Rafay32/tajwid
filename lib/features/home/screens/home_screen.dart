@@ -313,6 +313,7 @@ class _HomeScreenState extends State<HomeScreen>
                               );
                               await stopEverything().then((val) {
                                 userAudio = null;
+                                referenceFile = null;
                                 setState(() {});
                               });
                             },

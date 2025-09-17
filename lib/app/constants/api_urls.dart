@@ -1,4 +1,4 @@
-const baseURL = "https://eecb4a8e65ab.ngrok-free.app";
+const baseURL = "https://server.din-al-qayyim.com";
 
 class ApiUrls {
   static const login = "/auth/login";
